@@ -39,13 +39,6 @@ class Tank:
                 tank.fire = True
                 tank.start_fire_time = datetime.now()
                 real_damage = [real_damage, None]
-
-
-            # if battle_type == 'долгий' and tank.hp > 500 and random.random() < self.fire_prob:
-            #     self.fire = True
-            #     self.start_fire_time = datetime.now()
-            #     real_damage = [real_damage, None]
-
             elif (battle_type == 'долгий') and (tank.hp > self.damage * 1.25) and (random.random() < tank.charger_prob):
                 tank.charger_krit = True
                 tank.reload *= 1.9
@@ -55,8 +48,6 @@ class Tank:
             elif battle_type == 'долгий':
                 self.enemy_death = round((datetime.now() - start_time).total_seconds(), 2)
             self.shots[self.enemy_death] = real_damage
-            # print('self.shots', self.id, self.shots, 'kd', self.reload)
-            # print('tank.shots', tank.id, tank.shots, 'kd', tank.reload)
         else:
             real_damage = 'Броня не пробита!'
             self.enemy_death += self.reload
@@ -81,8 +72,6 @@ class Tank:
         elif mode == '2':
             message = f"{player_tanks[user_id_1]['id']} стреляет по {player_tanks[user_id_2]['id']}:\n"
             message += f"{num_shot}) {self.hp} - {fire_damage} = {self.hp - fire_damage} - урон от пожара\n"
-            # print('inside mode 2', message)
-        # print('outside mode 2', message)
         if mode in ['0', '2']:
             self.hp -= fire_damage
             self.fire = False
@@ -92,7 +81,6 @@ class Tank:
     
     def update_hp_and_shots(self, tank):
         if self.enemy_death < tank.enemy_death:
-#             яга выиграла
             tank.shots = {
                 k: v for k, v in tank.shots.items()
                 if k <= self.enemy_death
@@ -103,7 +91,6 @@ class Tank:
             tank.hp = 0
             
         elif self.enemy_death > tank.enemy_death:
-#             яга проиграла
             self.hp = 0
             self.shots = {
                 k: v for k, v in self.shots.items()
@@ -160,11 +147,6 @@ class Tank:
                     message += f'{shot_num}) {hp} - {damage} < 0\n'
             elif damage == 'Броня не пробита!':
                 message += f'{shot_num}) {damage}\n'
-            # elif isinstance(damage, list):
-            #     message += f'{shot_num}) {hp} - {damage[0]} = {hp - damage[0]}\n'
-            #     hp -= damage[0]
-            #     message += f'{shot_num}) {hp} - {damage[1]} = {hp - damage[1]} - урон от пожара\n'
-            #     hp -= damage[1]
             elif isinstance(damage, list):
                 if isinstance(damage[1], int):
                     message += f'{shot_num}) {hp} - {damage[0]} = {hp - damage[0]}\n'
@@ -190,11 +172,6 @@ class Tank:
                     message += f'{shot_num}) {hp} - {damage} < 0\n'
             elif damage == 'Броня не пробита!':
                 message += f'{shot_num}) {damage}\n'
-            # elif isinstance(damage, list):
-            #     message += f'{shot_num}) {hp} - {damage[0]} = {hp - damage[0]}\n'
-            #     hp -= damage[0]
-            #     message += f'{shot_num}) {hp} - {damage[1]} = {hp - damage[1]} - урон от пожара\n'
-            #     hp -= damage[1]
             elif isinstance(damage, list):
                 if isinstance(damage[1], int):
                     message += f'{shot_num}) {hp} - {damage[0]} = {hp - damage[0]}\n'

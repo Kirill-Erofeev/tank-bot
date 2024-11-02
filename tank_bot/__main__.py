@@ -1,40 +1,28 @@
-#123
 import re
 import json
 import vk_api
 import random
-import requests
-import numpy as np
-from vk_api import VkApi
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
-from datetime import datetime, timedelta, date
-from functools import reduce
-from tank import Tank
-from vkusers import VKUsers
-from demotivator import Demotivator
-from functions import *
+from datetime import datetime, timedelta
+from .tank import Tank
+from .functions import *
 
-users = VKUsers(GROUP_ID, GROUP_TOKEN)
+
+
+vk_session = vk_api.VkApi(token=GROUP_TOKEN)
+longpoll = VkBotLongPoll(vk_session, group_id=GROUP_ID)
+vk = vk_session.get_api()
+
+create_users_json(vk)
+
 users = read_json('users.json')
 photos = read_json('photos.json')
 messages = read_json('messages.json')
 
-# with open('photos.json', mode='r') as openfile:
-#     photos = json.load(openfile)
-
-# with open('messages.json', mode='r') as openfile:
-#     messages = json.load(openfile)
-
-
-vk_session = VkApi(token=GROUP_TOKEN)
-longpoll = VkBotLongPoll(vk_session, group_id=GROUP_ID)
-vk = vk_session.get_api()
 long_battle = False
 lock = False
 
-
 keyboard_1, keyboard_2, keyboard_3 = get_keyboards(users)
-
 
 for event in longpoll.listen():
 
@@ -44,20 +32,15 @@ for event in longpoll.listen():
     attachment = None
 
     if event.type == VkBotEventType.MESSAGE_NEW and event.from_chat:
-        # print('12')
         chat_id = int(event.chat_id)
         message_text = event.object.message['text'].lower()
         user_id = event.object.message['from_id']
-        # print(event.object.message['attachments'][0]['doc']['url'])
-        # print(event.object.message['attachments'][0]['doc']['ext'])
         try:
             url = event.object.message['attachments'][0]['doc']['url']
-            # print(url)
             expansion = event.object.message['attachments'][0]['doc']['ext']
             if expansion in ['png', 'jpg', 'jpeg']:
                 photos.append({'url': url, 'expansion': expansion})
-                # print(photos)
-                with open(DATA_FOLDER_FILE_PATH + 'photos.json', mode='w') as outfile:
+                with open(JSON_FILE_PATH + 'photos.json', mode='w') as outfile:
                     json.dump(photos, outfile)
 
         except:
@@ -67,7 +50,7 @@ for event in longpoll.listen():
         finally:
             if len(message_text) <= 15 and message_text not in ['выстрел', 'вылечить', 'потушить', 'завершить бой', '', '&', None]:
                 messages.append(message_text)
-                with open(DATA_FOLDER_FILE_PATH + 'messages.json', mode='w') as outfile:
+                with open(JSON_FILE_PATH + 'messages.json', mode='w') as outfile:
                     json.dump(messages, outfile)
         
         try:
@@ -76,8 +59,6 @@ for event in longpoll.listen():
 
             if reply_message_from_id == -GROUP_ID:
                 if re.match('^[\[\]\|a-z0-9@_]+[а-яА-ЯёЁa-zA-Z,"\?\.\n ]+$', reply_message_text):
-                    # invited_user = [dic for dic in users if dic['id'] == list(player_tanks.keys())[0]][0]
-                    # fln = invited_user['first_last_name']
                     if user_id == list(player_tanks.keys())[1]:
                         if (datetime.now() - invite_time).total_seconds() < 180:
                             if message_text in ['да', 'д', 'согласен', 'согл', 'yes', 'y', 'lf']:
@@ -96,11 +77,6 @@ for event in longpoll.listen():
         
         except Exception as e:
             pass
-            # print(f'EXCEPT: {e}')
-            # message = f'ОШИБКА: {e}'
-        
-        # if battle_type == 'быстрый' and None not in player_tanks.values():
-        #     message = 'Бой начинается!'
             
         if message_text.startswith('&'):
             message = 'Привет!'
@@ -110,7 +86,6 @@ for event in longpoll.listen():
             user_id_2 = list(player_tanks.keys())[1]
 
             if user_id == user_id_1:
-                # print('1 user')
                 if datetime.now() > shot_time_1:
                     if tank_2.fire and user_id == user_id_1:
                         message = tank_2.compute_fire(
@@ -140,7 +115,7 @@ for event in longpoll.listen():
                         tank_1.update_dict(tank_2, user_id_1, user_id_2, users)
                         message = tank_1.get_message(tank_2)
                         users = tank_1.update_json(tank_2, user_id_1, user_id_2, users)
-                        with open(DATA_FOLDER_FILE_PATH + 'users.json', mode='w') as outfile:
+                        with open(JSON_FILE_PATH + 'users.json', mode='w') as outfile:
                             json.dump(users, outfile)
                         long_battle = False
                         battle_type = None
@@ -156,13 +131,11 @@ for event in longpoll.listen():
                                 message += f'- {damage[0]} = {tank_2.hp}\nПротивник в огне!'
                             elif isinstance(damage[1], str):
                                 message += f'- {damage[0]} = {tank_2.hp}\n{damage[1]}'
-#                         message += f'- {damage} = {tank_2.hp}'
                         
                 else:
                     message = f'Орудие {tank_1.id} перезаряжается!'
                 
             elif user_id == user_id_2:
-                # print('2 user')
                 if datetime.now() > shot_time_2:
                     if tank_1.fire and user_id == user_id_2:
                         message = tank_1.compute_fire(
@@ -192,7 +165,7 @@ for event in longpoll.listen():
                         tank_1.update_dict(tank_2, user_id_1, user_id_2, users)
                         message = tank_1.get_message(tank_2)
                         users = tank_1.update_json(tank_2, user_id_1, user_id_2, users)
-                        with open(DATA_FOLDER_FILE_PATH + 'users.json', mode='w') as outfile:
+                        with open(JSON_FILE_PATH + 'users.json', mode='w') as outfile:
                             json.dump(users, outfile)
                         long_battle = False
                         battle_type = None
@@ -203,8 +176,6 @@ for event in longpoll.listen():
                             message += f'- {damage} = {tank_1.hp}'
                         elif isinstance(damage, str):
                             message = f'{num_shot_2}) {damage}'
-                        # elif isinstance(damage, list):
-                        #     message += f'- {damage[0]} = {tank_1.hp}. ВРАГ ГОРИТ!'
                         elif isinstance(damage, list):
                             if isinstance(damage[1], int) or damage[1] == None:
                                 message += f'- {damage[0]} = {tank_1.hp}\nПротивник в огне!'
@@ -249,8 +220,6 @@ for event in longpoll.listen():
                 tank_2.charger_krit = False
                 message = f"Заряжающий {player_tanks[user_id]['id']} вылечен"
         
-
-
         try:
             if battle_type != None and message_text == 'отменить приглашение' and long_battle == False and lock:
                 if (datetime.now() - invite_time).total_seconds() > 180:
@@ -344,8 +313,6 @@ for event in longpoll.listen():
             if user_id in player_tanks.keys():
                 tank_info = [dic for dic in TANKS if dic['id'] == button_value][0]
                 player_tanks[user_id] = tank_info
-                # message = f'Выбор @{user_domain}: {button_value}'
-                # message = f'{user_fln} выбирает {button_value}'
                 message = f'{user_fln} сделал свой выбор'
                 if None in player_tanks.values():
                     keyboard = keyboard_3
@@ -366,16 +333,12 @@ for event in longpoll.listen():
                         
                 while tank_1.hp > 0:
                     damage = tank_2.give_damage(tank_1, battle_type)
-                
-#                 42 < 46
-#                 46 > 42
 
                 tank_1.update_hp_and_shots(tank_2)
-#                 winner = tank_1.get_winner(tank_2, id_1, id_2)
                 tank_1.update_dict(tank_2, user_id_1, user_id_2, users)
                 message = tank_1.get_message(tank_2)
                 users = tank_1.update_json(tank_2, user_id_1, user_id_2, users)
-                with open(DATA_FOLDER_FILE_PATH + 'users.json', mode='w') as outfile:
+                with open(JSON_FILE_PATH + 'users.json', mode='w') as outfile:
                     json.dump(users, outfile)
                 player_tanks.clear()
                 battle_type = None
@@ -392,7 +355,7 @@ for event in longpoll.listen():
                 num_shot_2 = 0
                 message = 'Бой начинается!'
                 
-        
+
         vk.messages.send(
             peer_id=event.object.peer_id,
             random_id=random_id,
@@ -401,48 +364,8 @@ for event in longpoll.listen():
             attachment=attachment
         )
     
+
     if keyboard in [keyboard_2, keyboard_3]:
         lock = False
     elif keyboard == keyboard_1:
         lock = True
-
-            # if tank_1.fire and user_id == user_id_2:
-            #     for k, v in reversed(tank_2.shots.items()):
-            #         if isinstance(v, list) and tank_2.shots[k][1] == None:
-            #             tank_2.shots[k][1] = fire_damage
-            #             break
-            #         elif isinstance(v, list) and tank_2.shots[k][1] != None:
-            #             fire_damage = tank_2.shots[k][1]
-            #             break
-            #     message = f"{player_tanks[user_id_1]['id']} стреляет по {player_tanks[user_id_2]['id']}:\n"
-            #     message += f"{num_shot_2}) {tank_1.hp} - {fire_damage} = {tank_1.hp - fire_damage} - урон от пожара\n"
-            #     tank_1.hp -= fire_damage
-            #     tank_1.fire = False
-            #     tank_1.start_fire_time = None
-
-            # if tank_1.fire and user_id == user_id_1:
-            #     fire_time = (datetime.now() - tank_1.start_fire_time).total_seconds()
-            #     fire_damage = int(fire_time * 100)
-            #     if fire_damage > 500:
-            #         fire_damage = 500
-            #     for k, v in reversed(tank_2.shots.items()):
-            #         if isinstance(v, list) and tank_2.shots[k][1] == None:
-            #             tank_2.shots[k][1] = fire_damage
-            #             break
-            #     tank_1.hp -= fire_damage
-            #     tank_1.fire = False
-            #     tank_1.start_fire_time = None
-
-            # if user_id == user_id_1 and tank_1.fire:
-            #     fire_time = (datetime.now() - tank_1.start_fire_time).total_seconds()
-            #     print(user_id, fire_time)
-            #     fire_damage = int(fire_time * 100)
-            #     for k, v in reversed(tank_2.shots.items()):
-            #         if isinstance(v, list):
-            #             tank_2.shots[k][1] = fire_damage
-            #             break
-            #     message = f"Пожар {player_tanks[user_id]['id']} потушен"
-            #     tank_1.hp -= fire_damage
-            #     tank_1.fire = False
-            #     tank_1.start_fire_time = None
-
