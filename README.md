@@ -13,3 +13,57 @@
 ![Без имени 667](https://github.com/user-attachments/assets/1a3fc005-1f7e-42c9-b4c2-417345978fab)
 ### Пример "быстрого боя"
 ![Без имени 668](https://github.com/user-attachments/assets/f368a49f-6505-41a4-a898-0459dc8869a3)
+Shell:      console, shell
+Bash:       bash, sh, zsh
+PowerShell: powershell, ps
+DOS:        dos, bat, cmd
+```console
+cd \
+copy a b
+ping 192.168.0.1
+```
+```shell
+cd \
+copy a b
+ping 192.168.0.1
+```
+```bash
+cd \
+copy a b
+ping 192.168.0.1
+```
+```sh
+cd \
+copy a b
+ping 192.168.0.1
+```
+```zsh
+cd \
+copy a b
+ping 192.168.0.1
+```
+```powershell
+cd \
+copy a b
+ping 192.168.0.1
+```
+```ps
+cd \
+copy a b
+ping 192.168.0.1
+```
+```dos
+cd \
+copy a b
+ping 192.168.0.1
+```
+```bat
+cd \
+copy a b
+ping 192.168.0.1
+```
+```cmd
+cd \
+copy a b
+ping 192.168.0.1
+```
