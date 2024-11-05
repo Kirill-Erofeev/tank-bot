@@ -38,7 +38,7 @@ copy a b
 ping 192.168.0.1
 ```
 ```zsh
-cd \
+$ python cd \
 copy a b
 ping 192.168.0.1
 ```
