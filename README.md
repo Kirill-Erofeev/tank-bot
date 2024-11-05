@@ -23,6 +23,8 @@ venv\Scripts\activate.bat
 ```cmd
 pip install -r requirements.txt
 ```
+В файле `config.py` необходимо задать значение константам GROUP_ID и GROUP_TOKEN
+
 Активация программы
 ```cmd
 python ./tank_bot/__main__.py
@@ -43,9 +45,11 @@ python ./tank_bot/__main__.py
 ![Т8](https://github.com/user-attachments/assets/75f15988-930f-4f33-9dc5-cc71f7b7056d)
 ### Пример "быстрого боя"
 ![Быстрый бой](https://github.com/user-attachments/assets/21055858-dd1c-4238-9893-ea49c024ce77)
+
 ![Быстрый бой](https://github.com/user-attachments/assets/87cb947a-11c4-46db-a81a-f2a31decf93b)
 ### Пример "долгого" боя
 ![Долгий бой](https://github.com/user-attachments/assets/b3acb387-6549-4f35-bd2a-ac1751eba5f8)
+
 ![Долгий бой](https://github.com/user-attachments/assets/e2501f68-3426-4e40-8260-0eb1e4c88886)
 ### Пример "демотиватора"
 ![demotivator](https://github.com/user-attachments/assets/00267ec8-e39d-4907-8c3c-adb4f1c5f13c)

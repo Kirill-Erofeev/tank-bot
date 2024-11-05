@@ -2,9 +2,7 @@ import numpy as np
 
 GROUP_ID = 226416696
 
-GROUP_TOKEN = '''vk1.a.dBgqASfEk_UEHceRLCGZtxQhSc-FM6U39rfWbKR9mVzdbWO0D2trKAoC_vr26Ke9hr5ylMbwKc
-veGCY_l1F01nB0hVH7EnCVsFhaB4oT1iIN79O8nwdkG-1MgaKSs6tugkAbdxp_KIX7D_5TJSWyjLRpY5JIn29U178dIrakqiP
-OK_fTIbfFPE0gIDbzUIxeqmWIr4csmRkdornG17O6LQ''' #LU-XE
+GROUP_TOKEN = '''''' #LU-XE
 
 USER_IDS = [
     [271414666, '☢️'], #Даня М
