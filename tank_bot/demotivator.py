@@ -9,7 +9,7 @@ from PIL import (
     ImageDraw,
     ImageFont,
 )
-from .config import FONTS_FILE_PATH, IMAGES_FILE_PATH
+from config import FONTS_FILE_PATH, IMAGES_FILE_PATH
 
 
 class Demotivator:

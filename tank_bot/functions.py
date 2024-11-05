@@ -7,7 +7,7 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 
 
-from .config import *
+from config import *
 from PIL import Image
 from datetime import date
 from demotivator import Demotivator
@@ -295,9 +295,6 @@ def get_keyboards(users):
     )
 
     keyboard_3 = VkKeyboard(**KEYBOARD_SETTINGS)
-
-    np.random.shuffle(TANKS)
-    TANKS = TANKS[:36]
 
     for i, dic in enumerate(TANKS, start=1):
         keyboard_3.add_callback_button(

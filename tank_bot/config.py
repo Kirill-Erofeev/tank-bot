@@ -1,3 +1,5 @@
+import numpy as np
+
 GROUP_ID = 226416696
 
 GROUP_TOKEN = '''vk1.a.dBgqASfEk_UEHceRLCGZtxQhSc-FM6U39rfWbKR9mVzdbWO0D2trKAoC_vr26Ke9hr5ylMbwKc
@@ -124,6 +126,9 @@ TANKS = [
     {'id': '60TP Lewandowskiego', 'class_': 'ТТ', 'hp': 2756, 'damage': 630, 'reload': 14.74, 'breakout_prob': 0.77, 'fire_prob': 0.15},
     {'id': 'Vz. 55', 'class_': 'ТТ', 'hp': 2544, 'damage': 470, 'reload': 10.69, 'breakout_prob': 0.74, 'fire_prob': 0.10},
 ]
+
+np.random.shuffle(TANKS)
+TANKS = TANKS[:36]
 
 # Об. 777 Ⅱ, Concept 1B, Об. 907, XM66F
 #     {'id': 'FV4202', 'hp': 1908, 'damage': 350, 'reload': 6.74, 'breakout_prob': 0.8, 'fire_prob': 0.20},

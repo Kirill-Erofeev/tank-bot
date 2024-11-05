@@ -4,8 +4,8 @@ import vk_api
 import random
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 from datetime import datetime, timedelta
-from .tank import Tank
-from .functions import *
+from tank import Tank
+from functions import *
 
 
 
