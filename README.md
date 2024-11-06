@@ -27,7 +27,7 @@ pip install -r requirements.txt
 
 Активация программы
 ```cmd
-python tank-bot\__main__.py
+python tank_bot\__main__.py
 ```
 Отключение виртуального окружения после использования программы
 ```cmd
