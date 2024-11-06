@@ -5,11 +5,11 @@
 > 
 Клонирование репозитория
 ```cmd
-git clone https://github.com/Kirill-Erofeev/vk_bot.git
+git clone https://github.com/Kirill-Erofeev/tank-bot.git
 ```
 Переход в корневую папку проекта
 ```cmd
-cd ./vk_bot
+cd tank-bot
 ```
 Создание виртуального окружения
 ```cmd
@@ -27,7 +27,7 @@ pip install -r requirements.txt
 
 Активация программы
 ```cmd
-python ./tank_bot/__main__.py
+python tank-bot\__main__.py
 ```
 ### Обзор файловой структуры
 * В файле `__main__.py` содержится точка входа в программу
