@@ -17,16 +17,7 @@ from datetime import date
 #Сервер https://cbbot.ifx.su/u6goc6:226106896?code=8dbdb95d
 player_tanks = {}
 battle_type = None
-# GROUP_TOKEN = """vk1.a.HNKbzJjt987sI6qa1TwXBlpYpxb4RO-c-y5KF9nnDLsTkc1Mouu7X_DPGWJVmsweEJkIXUFcQR
-# oTOf8YdhIn6sFtzK8h4MIFecAiwF_fSovgl7Bq1O5bJFVljxp-hf6qthNrX3GvaMi7JU4cr_Ac_LkKgf3q4y5OMbg5XOalt7F
-# Og9Me5qepbqfvjoQTlxvI8Mjol24sn_ixEO5X6yPz1g""" #Японская жаба
-GROUP_TOKEN = '''vk1.a.dBgqASfEk_UEHceRLCGZtxQhSc-FM6U39rfWbKR9mVzdbWO0D2trKAoC_vr26Ke9hr5ylMbwKc
-veGCY_l1F01nB0hVH7EnCVsFhaB4oT1iIN79O8nwdkG-1MgaKSs6tugkAbdxp_KIX7D_5TJSWyjLRpY5JIn29U178dIrakqiP
-OK_fTIbfFPE0gIDbzUIxeqmWIr4csmRkdornG17O6LQ''' #LU-XE
-# GROUP_TOKEN = '''vk1.a.GqXNacaJEtuM_Ew62A_BHvKMOvqGYlO5rUdPg1CGnDmid1fzeECZtqWwXXK_I8Zdrs-WCAz3ia
-# KY1azls8VI-mmrIXtVmpbKnNReWoqp3xOAwcW_bHTCDIpSQSgUeEVhqXzshoC4SxO0XWoECt3kvi7UKCB6wp71her01fGlHfh
-# Ws4VX69Wv5Z0DIf-hdSTYD64DaiUUjnHu4Al0DrAesA''' #ENEMY
-# GROUP_ID = 226106896 #Японская жаба
+GROUP_TOKEN = '''''' #LU-XE
 GROUP_ID = 226416696
 MY_ID = 249200120
 RUSLAN_ID = 303957001
