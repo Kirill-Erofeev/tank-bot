@@ -147,7 +147,3 @@ EFFECTS = [
     'seismic', 'seismic_r', 'spectral', 'spectral_r', 'spring', 'spring_r', 'summer', 'summer_r', 'tab10', 'tab10_r', 'tab20', 'tab20_r',
     'tab20b', 'tab20b_r', 'tab20c', 'tab20c_r', 'terrain', 'terrain_r', 'viridis', 'viridis_r', 'vlag', 'vlag_r', 'winter', 'winter_r'
 ]
-# GROUP_TOKEN = '''vk1.a.GqXNacaJEtuM_Ew62A_BHvKMOvqGYlO5rUdPg1CGnDmid1fzeECZtqWwXXK_I8Zdrs-WCAz3ia
-# KY1azls8VI-mmrIXtVmpbKnNReWoqp3xOAwcW_bHTCDIpSQSgUeEVhqXzshoC4SxO0XWoECt3kvi7UKCB6wp71her01fGlHfh
-# Ws4VX69Wv5Z0DIf-hdSTYD64DaiUUjnHu4Al0DrAesA''' #ENEMY
-# GROUP_ID = 226106896 #Японская жаба
